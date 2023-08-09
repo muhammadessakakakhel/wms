@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiled WMS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+      #map {
+        height: 500px;
+        width: 800px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+      var map = L.map('map').setView([30, 70], 5);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/demo3/wms', {
+        layers: 'demo3:badhaadhe', // Replace with your layer name from GeoServer
+        format: 'image/png',
+        transparent: true
+      }).addTo(map);
+    </script>
+  </body>
+</html>
